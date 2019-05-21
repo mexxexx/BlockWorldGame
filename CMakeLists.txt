@@ -6,5 +6,6 @@ project (BlockWorld)
 set (CMAKE_CXX_STANDARD 11)
 
 #Subdirectories
-add_subdirectory(BlockWorldGame)
 add_subdirectory(ExternalLibraries/glad)
+add_subdirectory(Engine)
+add_subdirectory(BlockWorldGame)
