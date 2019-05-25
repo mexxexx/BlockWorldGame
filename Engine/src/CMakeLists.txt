@@ -1,15 +1,34 @@
 # Source Files
-set (SOURCES game.cpp)
+set (SOURCES_ENGINE
+        game.cpp
+        window.cpp
+        shader.cpp
+        log.cpp
+        texture.cpp
+        camera.cpp)
+
 # Header Files
 set (HEADER_PATH ${PROJECT_SOURCE_DIR}/Engine/include)
-set (HEADER ${HEADER_PATH}/engine.h ${HEADER_PATH}/game.h)
+set (HEADER_ENGINE 
+        ${HEADER_PATH}/engine.h 
+        ${HEADER_PATH}/game.h
+        ${HEADER_PATH}/window.h
+        ${HEADER_PATH}/shader.h
+        ${HEADER_PATH}/log.h
+        ${HEADER_PATH}/texture.h
+        ${HEADER_PATH}/stb_image.h
+        ${HEADER_PATH}/camera.h)
 
 # Create Library
 set (LIBRARY_NAME engine)
-add_library(${LIBRARY_NAME} ${SOURCES} ${HEADER})
+add_library(${LIBRARY_NAME} STATIC ${SOURCES_ENGINE} ${HEADER_ENGINE})
+set_target_properties(${LIBRARY_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 # Include Project Header Files
 target_include_directories(${LIBRARY_NAME} PUBLIC ${HEADER_PATH})
+
+# Include glm Header Files
+target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/ExternalLibraries/glm/include)
 
 # Include glad Header Files
 target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/ExternalLibraries/glad/include)
