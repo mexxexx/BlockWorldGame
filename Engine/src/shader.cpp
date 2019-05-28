@@ -127,8 +127,9 @@ int Shader::checkCompileErrors(unsigned int shader, std::string type)
         if (!success)
         {
             glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-            Log::e("SHADER_COMPILATION_ERROR of type: ");
-            Log::e(infoLog);
+            std::stringstream err;
+            err << "SHADER_COMPILATION_ERROR in " << type << " of type: " << infoLog;
+            Log::e(err.str());
             return 0;
         }
     }

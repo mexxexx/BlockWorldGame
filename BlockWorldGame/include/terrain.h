@@ -1,0 +1,4 @@
+#ifndef __BLOCKWORLDGAME_TERRAIN_H__
+#define __BLOCKWORLDGAME_TERRAIN_H__
+
+#endif

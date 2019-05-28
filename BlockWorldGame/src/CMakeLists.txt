@@ -1,11 +1,18 @@
 # Source Files
 set (SOURCES_GAME
         main.cpp 
-        blockWorldGame.cpp)
+        blockWorldGame.cpp
+        terrain.cpp
+        chunk.cpp
+        chunkContainer.cpp)
 # Header Files
 set (HEADER_PATH ${PROJECT_SOURCE_DIR}/BlockWorldGame/include)
 set (HEADER_GAME
-        ${HEADER_PATH}/blockWorldGame.h)
+        ${HEADER_PATH}/blockWorldGame.h
+        ${HEADER_PATH}/terrain.h
+        ${HEADER_PATH}/chunk.h
+        ${HEADER_PATH}/blockType.h
+        ${HEADER_PATH}/chunkContainer.h)
  
 # Create Executable
 set(EXECUTABLE_NAME bwg)

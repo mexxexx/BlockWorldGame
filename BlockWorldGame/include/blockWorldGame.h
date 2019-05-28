@@ -2,15 +2,25 @@
 #define __BLOCKWORLDGAME_BLOCKWORLDGAME_H__
 
 #include "engine.h"
+
 namespace bwg
 {
 class BWG : public engine::Game
 {
 protected:
+    void initialize();
     void loadContent();
     void unloadContent();
-    void update(double timeStep);
+    void update(const double timeStep);
     void draw();
+
+private:
+    void cameraMovement(const double deltaTime);
+    engine::Camera camera;
+    double cameraMovementSpeed = 5;
+    double cameraRotationSpeed = 0.1;
+    bool firstMouse = true;
+    int lastX, lastY;
 };
 } // namespace bwg
 

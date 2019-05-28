@@ -5,16 +5,19 @@
 
 #include <string>
 
-namespace engine {
-    class Texture {
-        public:
-            int loadTexture(std::string path, GLenum colorFormat);
-            void deleteTexture();
-            void use();
-            GLuint getglTexture();
-        private:
-            GLuint glTexture;
-    };
-}
+namespace engine
+{
+class Texture
+{
+public:
+    int loadTexture(const std::string path, const GLenum colorFormat, const bool flipVertically);
+    void deleteTexture();
+    void use() const;
+    GLuint getglTexture() const;
+
+private:
+    GLuint glTexture;
+};
+} // namespace engine
 
 #endif
