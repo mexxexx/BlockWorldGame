@@ -34,7 +34,8 @@ int Texture::loadTexture(const std::string path, const GLenum colorFormat, const
 
 void Texture::deleteTexture()
 {
-    glDeleteTextures(1, &glTexture);
+    if (glTexture != 0)
+        glDeleteTextures(1, &glTexture);
 }
 
 void Texture::use() const

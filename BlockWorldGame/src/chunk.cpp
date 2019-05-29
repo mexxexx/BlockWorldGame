@@ -3,6 +3,9 @@
 namespace bwg
 {
 BlockType Chunk::blockTypes[] = {};
+Chunk::Chunk(const int chunkOffsetX, const int chunkOffsetY, const int chunkOffsetZ) : chunkOffsetX(chunkOffsetX), chunkOffsetY(chunkOffsetY), chunkOffsetZ(chunkOffsetZ)
+{
+}
 
 void Chunk::loadBlockTypes()
 {
@@ -36,7 +39,7 @@ void Chunk::generateChunk()
         {
             for (int z = 0; z < CHUNK_DIMENSION; z++)
             {
-                blocks[x + y * CHUNK_DIMENSION + z * CHUNK_DIMENSION * CHUNK_DIMENSION] = (-(x+y-z)%3 == 0) ? 0 : 1;
+                blocks[x + y * CHUNK_DIMENSION + z * CHUNK_DIMENSION * CHUNK_DIMENSION] = (-(x + y - z) % 3 == 0) ? 1 : 1;
             }
         }
     }
@@ -57,33 +60,36 @@ void Chunk::getVisibleFaces(std::vector<GLfloat> &vertices, std::vector<GLint> &
             {
                 unsigned char type = blocks[x + y * CHUNK_DIMENSION + z * CHUNK_DIMENSION * CHUNK_DIMENSION];
                 BlockType blockType = Chunk::blockTypes[type];
+                int xWorldPos = x + chunkOffsetX * CHUNK_DIMENSION;
+                int yWorldPos = y + chunkOffsetY * CHUNK_DIMENSION;
+                int zWorldPos = z + chunkOffsetZ * CHUNK_DIMENSION;
                 if (blockType.visibility == BlockType::Solid)
                 {
                     BlockType *neighbour = getBlockType(x + 1, y, z);
                     if (blockIsSeeThrough(neighbour))
-                        addBlockRightFace(vertices, vertexOffset, indices, x, y, z, blockType);
+                        addBlockRightFace(vertices, vertexOffset, indices, xWorldPos, yWorldPos, zWorldPos, blockType);
 
                     neighbour = getBlockType(x, y + 1, z);
                     if (!neighbour || blockIsSeeThrough(neighbour))
-                        addBlockTopFace(vertices, vertexOffset, indices, x, y, z, blockType);
+                        addBlockTopFace(vertices, vertexOffset, indices, xWorldPos, yWorldPos, zWorldPos, blockType);
 
                     neighbour = getBlockType(x, y, z + 1);
                     if (blockIsSeeThrough(neighbour))
-                        addBlockFrontFace(vertices, vertexOffset, indices, x, y, z, blockType);
+                        addBlockFrontFace(vertices, vertexOffset, indices, xWorldPos, yWorldPos, zWorldPos, blockType);
                 }
                 else if (blockIsSeeThrough(&blockType))
                 {
                     BlockType *neighbour = getBlockType(x + 1, y, z);
                     if (neighbour && !blockIsSeeThrough(neighbour))
-                        addBlockLeftFace(vertices, vertexOffset, indices, x + 1, y, z, *neighbour);
+                        addBlockLeftFace(vertices, vertexOffset, indices, xWorldPos + 1, yWorldPos, zWorldPos, *neighbour);
 
                     neighbour = getBlockType(x, y + 1, z);
                     if (neighbour && !blockIsSeeThrough(neighbour))
-                        addBlockBottomFace(vertices, vertexOffset, indices, x, y + 1, z, *neighbour);
+                        addBlockBottomFace(vertices, vertexOffset, indices, xWorldPos, yWorldPos + 1, zWorldPos, *neighbour);
 
                     neighbour = getBlockType(x, y, z + 1);
                     if (neighbour && !blockIsSeeThrough(neighbour))
-                        addBlockBackFace(vertices, vertexOffset, indices, x, y, z + 1, *neighbour);
+                        addBlockBackFace(vertices, vertexOffset, indices, xWorldPos, yWorldPos, zWorldPos + 1, *neighbour);
                 }
             }
         }

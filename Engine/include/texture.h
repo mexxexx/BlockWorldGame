@@ -16,7 +16,7 @@ public:
     GLuint getglTexture() const;
 
 private:
-    GLuint glTexture;
+    GLuint glTexture = 0;
 };
 } // namespace engine
 

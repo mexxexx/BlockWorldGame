@@ -12,6 +12,7 @@ namespace bwg
 class Chunk
 {
 public:
+    Chunk(const int chunkOffsetX, const int chunkOffsetY, const int chunkOffsetZ);
     // Chunk dimension in x, y, z coordinate direction
     static const int CHUNK_DIMENSION = 16;
     void generateChunk();
@@ -19,6 +20,7 @@ public:
     static void loadBlockTypes();
 
 private:
+    int chunkOffsetX, chunkOffsetY, chunkOffsetZ;
     BlockType *getBlockType(const int x, const int y, const int z) const;
     bool blockIsSeeThrough(const BlockType *block) const;
     unsigned char blocks[CHUNK_DIMENSION * CHUNK_DIMENSION * CHUNK_DIMENSION];

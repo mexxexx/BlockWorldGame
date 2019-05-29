@@ -11,11 +11,6 @@
 
 namespace bwg
 {
-GLuint vao;
-engine::Shader shader;
-engine::Texture texture;
-int numVerticies;
-
 void BWG::initialize()
 {
     Game::initialize();
@@ -44,46 +39,13 @@ void BWG::initialize()
 
 void BWG::loadContent()
 {
-    Chunk c;
-    Chunk::loadBlockTypes(); 
-    c.generateChunk();
-    std::vector<GLfloat> vertices;
-    std::vector<GLint> indices;
-    int vertexOffset = 0;
-    c.getVisibleFaces(vertices, indices, vertexOffset);
-    numVerticies = indices.size();
-
-    GLuint vbo, ebo;
-    glGenBuffers(1, &vbo);
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &ebo);
-    glBindVertexArray(vao);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
-    int stride = 5 * sizeof(GLfloat);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void *)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    shader.loadShader("content/shader/terrain.vs", "", "content/shader/terrain.fs");
-
-    texture.loadTexture("content/textures/terrain.png", GL_RGBA, false);
-    texture.use();
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    terrain.loadContent();
+    terrain.generateTerrain();
 }
 
 void BWG::unloadContent()
 {
-    shader.deleteShader();
-    texture.deleteTexture();
-    glDeleteBuffers(1, &vao);
+    terrain.unloadContent();
 }
 
 void BWG::cameraMovement(const double deltaTime)
@@ -147,11 +109,6 @@ void BWG::draw()
     glClearColor(0.39f, 0.58f, 0.93f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    texture.use();
-    shader.use();
-    shader.setMatrix4fv("viewProjection", camera.getViewProjectionMatrix());
-    glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, numVerticies, GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
+    terrain.drawTerrain(camera);
 }
 } // namespace bwg

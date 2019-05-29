@@ -87,12 +87,12 @@ int Shader::loadShader(const std::string vertexPath, const std::string geometryP
     return checkCompileErrors(glShaderProgram, "PROGRAM");
 }
 
-GLuint Shader::getglShaderProgram()
+GLuint Shader::getglShaderProgram() const
 {
     return this->glShaderProgram;
 }
 
-void Shader::use()
+void Shader::use() const
 {
     glUseProgram(glShaderProgram);
 }
@@ -117,7 +117,7 @@ void Shader::setMatrix4fv(const std::string &name, glm::mat4 value) const
     glUniformMatrix4fv(glGetUniformLocation(glShaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
-int Shader::checkCompileErrors(unsigned int shader, std::string type)
+int Shader::checkCompileErrors(unsigned int shader, std::string type) const
 {
     int success;
     char infoLog[1024];

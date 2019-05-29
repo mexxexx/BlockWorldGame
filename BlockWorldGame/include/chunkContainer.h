@@ -12,6 +12,8 @@ class ChunkContainer
 {
     public:
         ChunkContainer(const int maxSizeX, const int maxSizeY, const int maxSizeZ);
+        void generateInitialChunks();
+        void getVisibleFaces(std::vector<GLfloat> &vertices, std::vector<int> &indices) const;
     private:
         int maxSizeX, maxSizeY, maxSizeZ;
         std::vector<std::unique_ptr<Chunk>> chunks;

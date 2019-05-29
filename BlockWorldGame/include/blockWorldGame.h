@@ -3,6 +3,8 @@
 
 #include "engine.h"
 
+#include "terrain.h"
+
 namespace bwg
 {
 class BWG : public engine::Game
@@ -16,6 +18,7 @@ protected:
 
 private:
     void cameraMovement(const double deltaTime);
+    Terrain terrain;
     engine::Camera camera;
     double cameraMovementSpeed = 5;
     double cameraRotationSpeed = 0.1;
