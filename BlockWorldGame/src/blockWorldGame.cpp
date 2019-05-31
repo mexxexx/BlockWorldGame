@@ -20,13 +20,13 @@ void BWG::initialize()
     glEnable(GL_CULL_FACE); 
     glCullFace(GL_BACK);
 
-    glfwSetInputMode(window.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetWindowPos(window.getGLFWwindow(), 700, 400);
 
     camera.setFOV(45);
     camera.setAspectRatio((float)window.getWindowWidth() / (float)window.getWindowHeight());
     camera.setNearPlane(0.1f);
-    camera.setFarPlane(100.0f);
+    camera.setFarPlane(1000.0f);
     camera.updateProjectionMatrix();
 
     camera.setCameraPosition(glm::vec3(0.0f, 80.0f, 0.0f));

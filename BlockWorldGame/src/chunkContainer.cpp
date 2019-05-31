@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <chrono>
+#include <sstream>
 
 #include "engine.h"
 
@@ -13,6 +14,8 @@ ChunkContainer::ChunkContainer(const int maxSizeX, const int maxSizeY, const int
 
 void ChunkContainer::generateInitialChunks()
 {
+    std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
     minChunkOffsetX = maxSizeX / 2 - maxSizeX + 1;
     minChunkOffsetY = 0;
     minChunkOffsetZ = maxSizeZ / 2 - maxSizeZ + 1;
@@ -30,11 +33,17 @@ void ChunkContainer::generateInitialChunks()
             }
         }
     }
+
+    std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
+    std::stringstream sstream;
+    sstream << "Duration of initial chunk generation: " << duration << "ms";
+    engine::Log::d(sstream.str());
 }
 
 void ChunkContainer::getVisibleFaces(std::vector<Chunk::BlockVertexAttribute> &vertices, std::vector<int> &indices) const
 {
-
     std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
     int vertexOffset = 0;
@@ -52,7 +61,9 @@ void ChunkContainer::getVisibleFaces(std::vector<Chunk::BlockVertexAttribute> &v
     std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
-    engine::Log::d(std::to_string(duration));
+    std::stringstream sstream;
+    sstream << "Duration of face collection: " << duration << "ms";
+    engine::Log::d(sstream.str());
 }
 
 BlockType *ChunkContainer::getBlockType(const int x, const int y, const int z) const

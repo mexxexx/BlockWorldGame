@@ -29,9 +29,9 @@ private:
     GLuint terrainVao = 0;
     int numVertices; 
     glm::vec3 lighColor = glm::vec3(1.0f);
-    glm::vec3 lighDirection = glm::normalize(glm::vec3(1.0f, 0.75f, 1.0f));
+    glm::vec3 lighDirection = glm::normalize(glm::vec3(4.0f, 0.75f, 1.0f));
     engine::Texture1D ambientDiffuseMap;
-    float ambientStrength = 0.5f;
+    float ambientStrength = 0.7f;
     engine::Shader terrainShader;
     engine::Texture2D terrainTexture;
     std::unique_ptr<ChunkContainer> chunkContainer;
