@@ -4,7 +4,8 @@ set (SOURCES_ENGINE
         window.cpp
         shader.cpp
         log.cpp
-        texture.cpp
+        texture1D.cpp
+        texture2D.cpp
         camera.cpp)
 
 # Header Files
@@ -15,7 +16,8 @@ set (HEADER_ENGINE
         ${HEADER_PATH}/window.h
         ${HEADER_PATH}/shader.h
         ${HEADER_PATH}/log.h
-        ${HEADER_PATH}/texture.h
+        ${HEADER_PATH}/texture1D.h
+        ${HEADER_PATH}/texture2D.h
         ${HEADER_PATH}/stb_image.h
         ${HEADER_PATH}/camera.h)
 

@@ -65,7 +65,7 @@ void Game::run()
 void Game::initialize()
 {
     timeStep = 1.0/60;
-    int windowResult = window.initialize(800, 600);
+    int windowResult = window.initialize(1280, 720);
     if (!windowResult) {
         this->shouldRun = false;
         return;

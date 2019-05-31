@@ -20,7 +20,7 @@ private:
     void cameraMovement(const double deltaTime);
     Terrain terrain;
     engine::Camera camera;
-    double cameraMovementSpeed = 5;
+    double cameraMovementSpeed = 15;
     double cameraRotationSpeed = 0.1;
     bool firstMouse = true;
     int lastX, lastY;

@@ -4,7 +4,8 @@ set (SOURCES_GAME
         blockWorldGame.cpp
         terrain.cpp
         chunk.cpp
-        chunkContainer.cpp)
+        chunkContainer.cpp
+        valueNoise.cpp)
 # Header Files
 set (HEADER_PATH ${PROJECT_SOURCE_DIR}/BlockWorldGame/include)
 set (HEADER_GAME
@@ -12,7 +13,8 @@ set (HEADER_GAME
         ${HEADER_PATH}/terrain.h
         ${HEADER_PATH}/chunk.h
         ${HEADER_PATH}/blockType.h
-        ${HEADER_PATH}/chunkContainer.h)
+        ${HEADER_PATH}/chunkContainer.h
+        ${HEADER_PATH}/valueNoise.h)
  
 # Create Executable
 set(EXECUTABLE_NAME bwg)

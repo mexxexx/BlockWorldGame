@@ -14,8 +14,8 @@ Shader::Shader()
     glShaderProgram = 0;
 }
 
-Shader::~Shader() {
-
+Shader::~Shader()
+{
 }
 
 void Shader::deleteShader()
@@ -110,6 +110,11 @@ void Shader::setInt(const std::string &name, GLint value) const
 void Shader::setFloat(const std::string &name, GLfloat value) const
 {
     glUniform1f(glGetUniformLocation(glShaderProgram, name.c_str()), value);
+}
+
+void Shader::setVec4f(const std::string &name, glm::vec4 value) const
+{
+    glUniform4fv(glGetUniformLocation(glShaderProgram, name.c_str()), 1, glm::value_ptr(value));
 }
 
 void Shader::setMatrix4fv(const std::string &name, glm::mat4 value) const

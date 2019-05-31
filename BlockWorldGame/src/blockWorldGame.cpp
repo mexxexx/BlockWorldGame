@@ -5,6 +5,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 #include <vector>
+#include <time.h>
 
 #include "engine.h"
 #include "chunk.h"
@@ -16,11 +17,11 @@ void BWG::initialize()
     Game::initialize();
 
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE); 
     glCullFace(GL_BACK);
 
-    //glfwSetInputMode(window.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetWindowPos(window.getGLFWwindow(), 1000, 400);
+    glfwSetInputMode(window.getGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetWindowPos(window.getGLFWwindow(), 700, 400);
 
     camera.setFOV(45);
     camera.setAspectRatio((float)window.getWindowWidth() / (float)window.getWindowHeight());
@@ -28,7 +29,7 @@ void BWG::initialize()
     camera.setFarPlane(100.0f);
     camera.updateProjectionMatrix();
 
-    camera.setCameraPosition(glm::vec3(20.0f, 30.0f, 20.0f));
+    camera.setCameraPosition(glm::vec3(0.0f, 80.0f, 0.0f));
     camera.setPitch(-45);
     camera.setYaw(-135);
     camera.calculateCameraFront();
@@ -40,7 +41,7 @@ void BWG::initialize()
 void BWG::loadContent()
 {
     terrain.loadContent();
-    terrain.generateTerrain();
+    terrain.generateTerrain(time(NULL));
 }
 
 void BWG::unloadContent()

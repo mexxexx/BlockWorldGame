@@ -5,7 +5,8 @@
 #include "window.h"
 #include "shader.h"
 #include "log.h"
-#include "texture.h"
+#include "texture1D.h"
+#include "texture2D.h"
 #include "camera.h"
 
 #endif
